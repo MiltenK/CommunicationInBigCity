@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     static void main() {
@@ -11,13 +10,31 @@ public class Main {
         Point result = getResult(sc);
 
         ArrayList<Station>  goodStations = new ArrayList<>();
+        ArrayList<Station>  badStations = new ArrayList<>();
         for (int i = 0; i < stationsArr.size(); i++) {
             if (checkIfPos(result, stationsArr.get(i))){
                 goodStations.add(stationsArr.get(i));
             }
+            else { badStations.add((stationsArr.get(i))); }
         }
-        System.out.println(goodStations);
 
+
+        Map<String, Integer> answer = new LinkedHashMap<>(); // благодаря этому у нас сортировка такая как надо
+        for (Station st : goodStations){
+            String name = st.name;
+            if (!answer.containsKey(name)) {
+                answer.put(name, 1);
+            }
+            else { answer.put(name, answer.get(name) + 1);
+            }
+        }
+
+        for (Station st : badStations){
+            if (!answer.containsKey(st.name)) {
+                answer.put(st.name, 0);
+            }
+        }
+        System.out.println(answer);
 
 
     }
@@ -57,4 +74,5 @@ public class Main {
     public static boolean checkIfPos(Point p, Station stations){
         return stations.r >= stations.point.distanceTo(p);
     }
+
 }
