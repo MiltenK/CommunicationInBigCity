@@ -1,11 +1,11 @@
-public class Stations {
+public class Station {
     public String name;
-    public int x, y, r;
+    public int r;
+    public Point point;
 
-    public Stations(String name, int x, int y, int r) {
+    public Station(String name, int x, int y, int r) {
         this.name = name;
-        this.x = x;
-        this.y = y;
+        point = new Point(x, y);
         this.r = r;
     }
 
@@ -13,8 +13,8 @@ public class Stations {
     public String toString() {
         return "Stations{" +
                 "name='" + name + '\'' +
-                ", x=" + x +
-                ", y=" + y +
+                ", x=" + point.x +
+                ", y=" + point.y +
                 ", r=" + r +
                 '}';
     }
